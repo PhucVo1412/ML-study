@@ -31,5 +31,5 @@ def plot_chain_rule(f, g, x_range=(-2, 2), title="Đạo hàm Chain Rule"):
 
 # f = e^(x^3 - 2x  + 1 )
 g = lambda x: x**3 - 2*x + 1
-f = lambda x: np.exp(g(x))
+f = lambda x: np.exp(x)
 plot_chain_rule(f, g, x_range=(0, 2.0), title="Đồ thị f(g(x)) = e^(x^3 - 2x + 1) và đạo hàm theo Chain Rule")
