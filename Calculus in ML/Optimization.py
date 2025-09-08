@@ -46,7 +46,13 @@ def exercise_2():
     learning_rate = 0.01
     epochs = 1000
     for _ in range(epochs):
-        pass
+        y_pred = w * X + b
+        error = y_pred - y
+        w_grad = (2/len(X)) * np.dot(error, X)
+        b_grad = (2/len(X)) * np.sum(error)
+        w -= learning_rate * w_grad
+        b -= learning_rate * b_grad
+        
 
     
     plt.scatter(X, y, label="Data")

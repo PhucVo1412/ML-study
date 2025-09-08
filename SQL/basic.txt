@@ -1,0 +1,62 @@
+C1:
+CREATE TABLE Salespersons(
+    SalespersonsID INT PRIMARY KEY,
+    FullName VARCHAR(100),
+    Email VARCHAR(100) UNIQUE,
+    PhoneNumber VARCHAR(10)
+);
+
+C2:
+CREATE TABLE Customers(
+    CustomersID INT PRIMARY KEY,
+    FullName VARCHAR(100),
+    Email VARCHAR(100) UNIQUE,
+    PhoneNumber VARCHAR(10)
+);
+
+C3:
+CREATE TABLE Orders(
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    SalespersonID INT,
+    OrderDate DATE,
+    TotalAmount DECIMAL,
+
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomersID),
+    FOREIGN KEY (SalespersonID) REFERENCES Salespersons(SalespersonsID)
+);
+
+C4:
+INSERT INTO Salespersons (SalespersonID, FullName,Email,PhoneNumber) VALUES (1,'Phuc','123@gmail.com','0868612497')
+
+C5:
+INSERT INTO Customers (CustomersID, FullName,Email,PhoneNumber) VALUES (1,'Phat','124@gmail.com','0868612497')
+
+C6:
+INSERT INTO Orders (OrderID,CustomerID,SalespersonID,OrderDate,TotalAmount) VALUES (1,1,1,'2025-09-04',2500)
+
+C7:
+SELECT * FROM Orders
+WHERE SalespersonID == 1
+
+C8:
+SELECT Customers.FullName, COUNT(Orders.OrderID) AS TotalOrders
+FROM Orders
+JOIN Customers ON Orders.CustomerID = Customers.CustomersID
+GROUP BY Customers.FullName
+ORDER BY TotalOrders DESC
+LIMIT 1;
+
+C9:
+SELECT Salespersons.FullName, SUM(Orders.TotalAmount) AS TotalSales
+FROM Orders
+JOIN Salespersons ON Orders.SalespersonID = Salespersons.SalespersonsID
+GROUP BY Salespersons.FullName;
+
+C10:
+SELECT Salespersons.FullName, SUM(Orders.TotalAmount) AS TotalSales
+FROM Orders
+JOIN Salespersons ON Orders.SalespersonID = Salespersons.SalespersonsID
+GROUP BY Salespersons.FullName
+ORDER BY TotalSales DESC
+LIMIT 1;
