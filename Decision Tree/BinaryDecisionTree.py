@@ -1,5 +1,4 @@
 
-
 class TreeNode:
     def __init__(self, feature_index=None, threshold=None, left=None, right=None, label=None):
         self.feature_index = feature_index        
